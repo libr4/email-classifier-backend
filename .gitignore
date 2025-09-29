@@ -1,0 +1,7 @@
+.envmodel_artifacts/
+*.joblib
+*.pt
+*.bin
+*.onnx
+.venv/
+__pycache__/
