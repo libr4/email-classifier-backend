@@ -1,0 +1,31 @@
+{
+  "family": "autou-api-task",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "512",
+  "memory": "1024",
+  "executionRoleArn": "arn:aws:iam::443071118667:role/autou-ecs-execution-role",
+  "containerDefinitions": [
+    {
+      "name": "api",
+      "image": "443071118667.dkr.ecr.sa-east-1.amazonaws.com/autou-api:latest",
+      "portMappings": [{ "containerPort": 8000, "protocol": "tcp" }],
+      "essential": true,
+      "environment": [
+        { "name": "PORT", "value": "8000" },
+        { "name": "TELEMETRY", "value": "off" },
+        { "name": "MODEL_DIR", "value": "/app/model_artifacts" },
+        { "name": "THRESHOLD", "value": "0.65" },
+        { "name": "CORS_ORIGINS", "value": "https://email-classifier-omega.vercel.app" }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/autou-api",
+          "awslogs-region": "sa-east-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      }
+    }
+  ]
+}

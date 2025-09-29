@@ -1,0 +1,28 @@
+# Python junk
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pytest_cache/
+.mypy_cache/
+
+# Venv & IDE
+.venv/
+.env
+.env.local
+.vscode/
+.idea/
+
+# Git & data
+.git/
+.gitignore
+*.log
+*.tmp
+*.cache/
+
+# Node stuff (if any)
+node_modules/
+
+# Models/caches downloaded at runtime
+model_cache/
+huggingface/

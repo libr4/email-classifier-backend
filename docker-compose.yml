@@ -1,0 +1,30 @@
+version: "3.8"
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: autou
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  api:
+    build: .
+    depends_on:
+      - db
+    environment:
+      THRESHOLD: "0.65"
+      PORT: 8000
+      DATABASE_URL: postgresql+psycopg://postgres:postgres@db:5432/autou
+      TELEMETRY: "on"
+      MODEL_DIR: /app/model_artifacts
+    volumes:
+      - ./model_artifacts:/app/model_artifacts:ro
+    ports:
+      - "8000:8000"
+
+volumes:
+  pgdata:
